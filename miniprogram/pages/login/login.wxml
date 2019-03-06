@@ -1,0 +1,9 @@
+<view
+  class='showIn cnCome'
+>{{normalcn}}</view>
+<view
+  class='showIn enCome'
+>{{normalen}}</view>
+<view
+  class='showIn jpCome'
+>{{normaljp}}</view>
