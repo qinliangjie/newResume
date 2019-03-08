@@ -2,7 +2,7 @@ Page({
   data: {
     normalcn: '您好',
     normalen: 'Hello',
-    normaljp: 'こんにちは'
+    normaljp: '...'
   },
   onLoad: function (options) {
     this.app = getApp()

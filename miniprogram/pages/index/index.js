@@ -7,10 +7,13 @@ Page({
     userInfo: {},
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    openid:"oaJdJ5HbfpYNIV_65OxcTgl-iFYo",
+    showOne:false
   },
 
   onLoad: function() {
+    var that = this;
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -20,7 +23,10 @@ Page({
     wx.cloud.callFunction({
       name: 'login',
       complete: res => {
-        console.log('callFunction test result: ', res)
+        if (res.openid == that.openid)
+        that.setData({
+          showOne:true
+        })
       }
     })
     wx.cloud.callFunction({
@@ -28,6 +34,12 @@ Page({
       complete:res=>{
         console.log(res)
       }
+    })
+    
+  },
+  gotoEdit:function(){
+    wx.redirectTo({
+      url: '../editResume/editResume'
     })
   }
 

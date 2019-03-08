@@ -1,14 +1,15 @@
 {
   "pages": [
-    "pages/login/login",
-    "pages/index/index",
-    "pages/chooseLib/chooseLib"
+    "pages/editResume/editResume",
+    "pages/chooseLib/chooseLib",
+    "pages/index/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
   }
 }

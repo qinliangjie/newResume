@@ -1,0 +1,39 @@
+<view class='container'>
+  <view class='edit_bg' data-type="1" bindtap='doUpload'>
+    <image class='bg_img' src='{{bgImg}}'>
+    </image>
+    <view class='edit_text'>轻触编辑背景图</view>
+  </view>
+  <view class='head_'>
+    <view class='head_mark' data-type="2" bindtap='doUpload'>
+      <i class='head_i iconfont icon-camera'></i>
+    </view>
+    <image class='head_img' src="{{proImg}}"></image>
+  </view>
+  <view class='edit_list'>
+    <view class='left_part'>昵称</view>
+    <view class='right_part'>
+      <input type='text' maxlength="12" placeholder="最大输入长度12"></input>
+    </view>
+  </view>
+  <view class='edit_list'>
+    <view class='left_part'>签名</view>
+    <view class='right_part'>
+      <textarea  maxlength="24" placeholder="最大输入长度24"></textarea>
+    </view>
+  </view>
+  <view class='edit_list'>
+    <view class='left_part'>生日</view>
+    <view class='right_part'>
+      <picker mode="date" value="{{date}}" 
+              start="2015-09-01"
+              end="2017-09-01"
+              bindchange="bindDateChange">
+              <view class="picker">
+                {{date}}
+              </view>
+      </picker>
+    </view>
+  </view>
+
+</view> 

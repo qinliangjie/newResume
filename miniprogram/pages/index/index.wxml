@@ -1,4 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-  
+    <view class='top_'>
+        <view class='top_img'></view>
+        <view class='top_name'></view>
+        <view class='top_introduce'></view>
+        <view class='setting_'></view>
+    </view>
 </view>
