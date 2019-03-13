@@ -1,0 +1,31 @@
+<view class="container" style='background-color:{{allColor}};color:{{fontColor}}'>
+  <view class='colorList'>
+    <text>今天喜欢什么颜色呢？</text>
+    <view class='colorItem gray' bindtap='changeColor' data-type="1">
+    </view>
+    <view class='colorItem blue' bindtap='changeColor' data-type="2">
+    </view>
+    <view class='colorItem orange' bindtap='changeColor' data-type="3">
+    </view>
+    <view class='colorItem pink' bindtap='changeColor' data-type="4">
+    </view>
+    <view class='colorItem black' bindtap='changeColor' data-type="5">
+    </view>
+  </view>
+  <view class='edit_list' style='border-color:{{fontColor}}'>
+    <view class='left_part'>概括一下？</view>
+    <view class='right_part'>
+      <input type='text' style='-webkit-text-fill-color:{{fontColor}}' value='{{title}}' bindinput='formTitle'></input>
+    </view>
+  </view>
+  <view class='edit_list' style='border-color:{{fontColor}}'>
+    <view class='left_part'>具体一点</view>
+    <view class='right_part'>
+      <textarea maxlength="-1" value='{{content}}' bindinput="formContent" auto-height="ture" style='-webkit-text-fill-color:{{fontColor}}'></textarea>
+    </view>
+  </view>
+  <view class='save'>
+    <view class='comfire'bindtap="comfire">写完惹，给人家存</view>
+    <view class='goout' bindtap='goout'>不想写了，给老子滚</view>
+  </view>
+</view>

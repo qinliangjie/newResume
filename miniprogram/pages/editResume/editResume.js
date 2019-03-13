@@ -5,58 +5,90 @@ Page({
    * 页面的初始数据
    */
   data: {
-    proImg:"",
-    bgImg:"",
-    photoImg:"",
-    date:'2000-01-01'
+    proImg: "",//头像
+    name:"",//昵称
+    bgImg: "",//背景图
+    sign:"",//签名
+    date: '2000-01-01',//出生日期
+    privates:[{
+      id:1,
+      detail:'展示所有日志'
+    },{
+      id:2,
+      detail:'仅展示半年内的日志'
+    },{
+      id:3,
+      detail:'仅展示三个月内的日志'
+    },{ 
+      id:4,
+      detail:'仅展示三天内的日志'
+    }],
+    p_index:0
   },
-  bindDateChange(e) {
+  change_p_index(e){
+    var value = e.detail.value
+    wx.cloud.callFunction({
+      name:'setting',
+      data:{
+        p_index:value
+      }
+    })
     this.setData({
-      date: e.detail.value
+      p_index:e.detail.value
     })
   },
-  doUpload:function(event){
+  saveName(e){
+    var value = e.detail.value;
+    wx.cloud.callFunction({
+      name:'setting',
+      data:{
+        name:value
+      }
+    })
+  },
+  saveSign(e){
+    var value = e.detail.value;
+    wx.cloud.callFunction({
+      name: 'setting',
+      data: {
+        sign: value
+      }
+    })
+  },
+
+  doUpload: function(event) {
     let that = this
     let aid = event.currentTarget.dataset.type
-    console.log(event)
     wx.chooseImage({
-      count:1,
-      sizeType:['compressed'],
-      sourceType:['album','camera'],
-      success:function(res){
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function(res) {
         wx.showLoading({
           title: '上传中'
         })
         const filePath = res.tempFilePaths[0];
-        const cloudPath = 'my-bg'+ aid + filePath.match(/\.[^.]+?$/)[0];
+        const cloudPath = 'my-bg' + aid + filePath.match(/\.[^.]+?$/)[0];
         wx.cloud.uploadFile({
           cloudPath,
           filePath,
-          success:res=>{
-            console.log("[上传成功]:",res);
-            if(aid==1){
-              app.globalData.fileID = res.fileID
-              app.globalData.cloudPath = cloudPath
-              app.globalData.imagePath = filePath
-            }
-            if(aid==2){
-              app.globalData.fileID_hd = res.fileID
-              app.globalData.cloudPath_hd = cloudPath
-              app.globalData.imagePath_hd = filePath
-            }
+          success: res => {
+            console.log("[上传成功]:", res);
+
           },
-          fail:e=>{
-            console.log('[上传失败]:',e)
+          fail: e => {
+            console.log('[上传失败]:', e)
             wx.showToast({
-              icon:'none',
-              title:'上传失败'
+              icon: 'none',
+              title: '上传失败'
             })
           },
-          complete:()=>{
-            wx.hideLoading();
+          complete: () => {
             const db = wx.cloud.database()
-            if(aid==1){
-              db.collection('userInfo').doc(this.data._id).update({
+            if (aid == 1) {
+              wx.hideLoading();
+              wx.cloud.callFunction({
+                name: 'setting',
                 data: {
                   bgimg: filePath
                 },
@@ -65,30 +97,38 @@ Page({
                     bgImg: filePath
                   })
                 },
-                fail:err=>{
-                  icon: 'none',
-                  console.log('上传失败');
+                fail: err => {
+                  wx.showToast({
+                    icon: 'none',
+                    title: '上传失败',
+                  })
+                  console.error('[云函数] [sum] 调用失败：', err)
                 }
               })
-              
+
             }
-            if(aid==2){
-              db.collection('userInfo').doc(this.data._id).update({
+            if (aid == 2) {
+              wx.hideLoading();
+              wx.cloud.callFunction({
+                name: 'setting',
                 data: {
                   hdimg: filePath
                 },
                 success: res => {
                   that.setData({
-                    proimg: filePath
+                    proImg: filePath
                   })
                 },
                 fail: err => {
-                  icon: 'none',
-                    console.log('上传失败');
+                  wx.showToast({
+                    icon: 'none',
+                    title: '上传失败',
+                  })
+                  console.error('[云函数] [sum] 调用失败：', err)
                 }
               })
             }
-            
+
           }
         })
       }
@@ -97,21 +137,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let that = this
     const db = wx.cloud.database()
     db.collection('userInfo').where({
@@ -119,8 +159,11 @@ Page({
     }).get({
       success(res) {
         that.setData({
-          proImg:res[0].hdimg,
-          bgImg:res[0].bgimg
+          proImg: res.data[0].hdimg,
+          bgImg: res.data[0].bgimg,
+          name:res.data[0].name,
+          sign: res.data[0].signature,
+          p_index:res.data[0].p_index
         })
       }
     })
@@ -129,35 +172,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
