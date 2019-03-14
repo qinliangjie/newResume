@@ -15,7 +15,7 @@ Page({
     switch (types){
       case "1":
         this.setData({
-          allColor:'#fff',
+          allColor:'rgb(219, 219, 219)',
           fontColor: '#333'
         })
         break;
@@ -56,6 +56,7 @@ Page({
     })
   },
   comfire:function(e){
+    const that = this;
     if (this.data.title==''){
       wx.showToast({
         icon:'none',
@@ -70,7 +71,32 @@ Page({
         icon:'none',
         duration:2000
       })
+      return
     }
+    wx.cloud.callFunction({
+      name:'artcle',
+      data:{
+        database:{
+          title: that.data.title,
+          content: that.data.content,
+          color: that.data.allColor,
+          fontColor: that.data.fontColor
+        }
+      },
+      success: res => {
+        wx.redirectTo({
+          url: '/pages/index/index',
+        })
+      },
+      fail: err => {
+        console.log(err)
+        wx.showToast({
+          title: '保存失败，傻钓服务7',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
  
   /**

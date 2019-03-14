@@ -15,13 +15,13 @@
   <view class='edit_list' style='border-color:{{fontColor}}'>
     <view class='left_part'>概括一下？</view>
     <view class='right_part'>
-      <input type='text' style='-webkit-text-fill-color:{{fontColor}}' value='{{title}}' bindinput='formTitle'></input>
+      <input type='text' style='-webkit-text-fill-color:{{fontColor}}' value='{{title}}' bindinput='formTitle' placeholder='嘻嘻...' placeholder-style="font-size:13px"></input>
     </view>
   </view>
   <view class='edit_list' style='border-color:{{fontColor}}'>
     <view class='left_part'>具体一点</view>
     <view class='right_part'>
-      <textarea maxlength="-1" value='{{content}}' bindinput="formContent" auto-height="ture" style='-webkit-text-fill-color:{{fontColor}}'></textarea>
+      <textarea maxlength="-1" value='{{content}}' bindinput="formContent" auto-height="ture" style='-webkit-text-fill-color:{{fontColor}}' placeholder='楼上的嘻什么？？' placeholder-style="font-size:13px"></textarea>
     </view>
   </view>
   <view class='save'>

@@ -25,6 +25,11 @@ Page({
     }],
     p_index:0
   },
+  gotoAdd: function () {
+    wx.navigateTo({
+      url: '../index/index'
+    })
+  },
   change_p_index(e){
     var value = e.detail.value
     wx.cloud.callFunction({
@@ -73,8 +78,15 @@ Page({
           cloudPath,
           filePath,
           success: res => {
-            console.log("[上传成功]:", res);
-
+            let thisres = res;
+            wx.showToast({
+              icon: 'none',
+              title: '上传成功'
+            })
+            that.setData({
+              fileID: thisres.fileID
+            })
+             
           },
           fail: e => {
             console.log('[上传失败]:', e)
@@ -86,11 +98,10 @@ Page({
           complete: () => {
             const db = wx.cloud.database()
             if (aid == 1) {
-              wx.hideLoading();
               wx.cloud.callFunction({
                 name: 'setting',
                 data: {
-                  bgimg: filePath
+                  bgimg: that.data.fileID
                 },
                 success: res => {
                   that.setData({
@@ -108,11 +119,10 @@ Page({
 
             }
             if (aid == 2) {
-              wx.hideLoading();
               wx.cloud.callFunction({
                 name: 'setting',
                 data: {
-                  hdimg: filePath
+                  hdimg: that.data.fileID
                 },
                 success: res => {
                   that.setData({
@@ -154,19 +164,44 @@ Page({
   onShow: function() {
     let that = this
     const db = wx.cloud.database()
-    db.collection('userInfo').where({
-      _id: 'XII8yXkPDdDCJ6tj'
-    }).get({
-      success(res) {
+    new Promise(function (resolve, reject){
+      db.collection('userInfo').where({
+        _id: 'XII8yXkPDdDCJ6tj'
+      }).get({
+        success(res) {
+          that.setData({
+            proId: res.data[0].hdimg,
+            bgId: res.data[0].bgimg,
+            name: res.data[0].name,
+            sign: res.data[0].signature,
+            p_index: res.data[0].p_index
+          })
+          resolve()
+        }
+      });
+    }).then(function(){
+      wx.cloud.downloadFile({
+        fileID: that.data.proId
+      }).then(res => {
+          that.setData({
+            proImg: res.tempFilePath
+          })
+      }).catch(error => {
+       
+      })
+      wx.cloud.downloadFile({
+        fileID: that.data.bgId
+      }).then(res => {
         that.setData({
-          proImg: res.data[0].hdimg,
-          bgImg: res.data[0].bgimg,
-          name:res.data[0].name,
-          sign: res.data[0].signature,
-          p_index:res.data[0].p_index
+          bgImg: res.tempFilePath
         })
-      }
+      }).catch(error => {
+        
+      })
     })
+    
+   
+    
   },
 
   /**

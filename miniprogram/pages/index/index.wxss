@@ -1,137 +1,82 @@
-/**index.wxss**/
+@import "/style/guide.wxss";
 
-page {
-  background: #f6f6f6;
+.container{
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
-
-.userinfo, .uploader, .tunnel {
-  margin-top: 40rpx;
-  height: 140rpx;
+.edit_bg{
   width: 100%;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-left: none;
-  border-right: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  transition: all 300ms ease;
+  height: 500rpx;
+  margin-bottom: 100rpx
 }
-
-.userinfo-avatar {
-  width: 100rpx;
-  height: 100rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-  background-size: cover;
-  background-color: white;
-}
-
-.userinfo-avatar:after {
-  border: none;
-}
-
-.userinfo-nickname {
-  font-size: 32rpx;
-  color: #007aff;
-  background-color: white;
-  background-size: cover;
-}
-
-.userinfo-nickname::after {
-  border: none;
-}
-
-.uploader, .tunnel {
-  height: auto;
-  padding: 0 0 0 40rpx;
-  flex-direction: column;
-  align-items: flex-start;
-  box-sizing: border-box;
-}
-
-.uploader-text, .tunnel-text {
+.bg_img{
   width: 100%;
-  line-height: 52px;
-  font-size: 34rpx;
-  color: #007aff;
+  height: 500rpx
 }
-
-.uploader-container {
-  width: 100%;
-  height: 400rpx;
-  padding: 20rpx 20rpx 20rpx 0;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.uploader-image {
-  width: 100%;
-  height: 360rpx;
-}
-
-.tunnel {
-  padding: 0 0 0 40rpx;
-}
-
-.tunnel-text {
-  position: relative;
-  color: #222;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.tunnel-text:first-child {
-  border-top: none;
-}
-
-.tunnel-switch {
+.edit_text{
   position: absolute;
-  right: 20rpx;
-  top: -2rpx;
+  right: 50rpx;
+  top: 450rpx;
+  font-size: 13px;
+  color: #666
 }
-
-.disable {
-  color: #888;
+.head_{
+  position: absolute;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 150rpx;
+  left: 50%;
+  margin-left: -75rpx;
+  top: 425rpx;
+  background-color: white
 }
-
-.service {
-  position: fixed;
-  right: 40rpx;
-  bottom: 40rpx;
+.head_img{
   width: 140rpx;
-  height: 140rpx;
-  border-radius: 50%;
-  background: linear-gradient(#007aff, #0063ce);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  transition: all 300ms ease;
-}
-
-.service-button {
+  height:140rpx;
+  left: 5rpx;
+  top: 5rpx;
   position: absolute;
-  top: 40rpx;
+  z-index: 1;
+  border-radius: 140rpx
 }
-
-.service:active {
-  box-shadow: none;
+.head_i{
+  position: absolute;
+  right: 30rpx;
+  top: 520rpx;
+  font-size: 22px
 }
-
-.request-text {
-  padding: 20rpx 0;
-  font-size: 24rpx;
-  line-height: 36rpx;
-  word-break: break-all;
+.head_a{
+  position: absolute;
+  top: 520rpx;
+  font-size: 22px;
+  left: 30rpx
+}
+.name{
+  margin-bottom: 10rpx;
+  
+  font-size: 18px
+}
+.sign{
+  font-size: 14px;
+  color: #666;
+}
+.dateBox{
+  width: 90%;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx
+}
+.dateBox{
+  margin-top: 30rpx;
+  padding:20rpx
+}
+.title{
+  margin-bottom: 10rpx
+}
+.content{
+  font-size: 16px;
+  margin-bottom: 10rpx
+}
+.time{
+  font-size: 13px;
+  float: right;
+  margin-right: 20rpx
 }

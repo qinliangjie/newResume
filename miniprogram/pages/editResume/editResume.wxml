@@ -1,4 +1,5 @@
 <view class='container'>
+  <i bindtap="gotoAdd" class='head_a iconfont icon-smile'></i>
   <view class='edit_bg' data-type="1" bindtap='doUpload'>
     <image class='bg_img' mode='aspectFill' src='{{bgImg}}'>
     </image>

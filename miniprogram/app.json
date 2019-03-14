@@ -1,10 +1,9 @@
 {
   "pages": [
-    "pages/editArtcle/editArtcle",
+    "pages/index/index",
     "pages/editResume/editResume",
-    "pages/chooseLib/chooseLib",
-    "pages/index/index"
-    
+    "pages/editArtcle/editArtcle",
+    "pages/chooseLib/chooseLib"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

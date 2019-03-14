@@ -3,23 +3,17 @@ const app = getApp()
 
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
-    takeSession: false,
-    requestResult: '',
+    bgImg:'',
+    name:'',
+    proImg:'',
+    sign:'',
     openid:"oaJdJ5HbfpYNIV_65OxcTgl-iFYo",
-    showOne:false
+    showOne:false,
+    p_index:0
   },
 
   onLoad: function() {
     var that = this;
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
-    }
     wx.cloud.callFunction({
       name: 'login',
       complete: res => {
@@ -29,18 +23,56 @@ Page({
         })
       }
     })
-    wx.cloud.callFunction({
-      name:'sum',
-      complete:res=>{
-        console.log(res)
-      }
+    const db = wx.cloud.database()
+    new Promise(function (resolve, reject) {
+      db.collection('userInfo').where({
+        _id: 'XII8yXkPDdDCJ6tj'
+      }).get({
+        success(res) {
+          that.setData({
+            proId: res.data[0].hdimg,
+            bgId: res.data[0].bgimg,
+            name: res.data[0].name,
+            sign: res.data[0].signature,
+            p_index: res.data[0].p_index
+          })
+          resolve()
+        }
+      });
+    }).then(function () {
+      wx.cloud.downloadFile({
+        fileID: that.data.proId
+      }).then(res => {
+        that.setData({
+          proImg: res.tempFilePath
+        })
+      }).catch(error => {
+
+      })
+      wx.cloud.downloadFile({
+        fileID: that.data.bgId
+      }).then(res => {
+        that.setData({
+          bgImg: res.tempFilePath
+        })
+      }).catch(error => {
+
+      })
     })
-    
+    db.collection('Arctic').get().then(res => {
+      that.setData({
+        dateList:res.data
+      })
+    })
   },
   gotoEdit:function(){
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../editResume/editResume'
     })
+  },
+  gotoAdd:function(){
+    wx.navigateTo({
+      url: '../editArtcle/editArtcle'
+    })
   }
-
 })

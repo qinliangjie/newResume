@@ -1,9 +1,21 @@
 <!--index.wxml-->
 <view class="container">
-    <view class='top_'>
-        <view class='top_img'></view>
-        <view class='top_name'></view>
-        <view class='top_introduce'></view>
-        <view class='setting_'></view>
-    </view>
+  <i wx:if="{{showOne}}" bindtap="gotoEdit" class='head_i iconfont icon-setting'></i>
+  <i wx:if="{{showOne}}" bindtap="gotoAdd" class='head_a iconfont icon-meh'></i>
+  <view class='edit_bg'>
+    <image class='bg_img' mode='aspectFill' src='{{bgImg}}'>
+    </image>
+  </view>
+  <view class='head_'>
+    <image class='head_img' src="{{proImg}}"></image>
+  </view>
+    <view class='name'>{{name}}</view>
+    <view class='sign'>{{sign}}</view>
+    <block wx:for="{{dateList}}">
+      <view class="dateBox" style='background-color:{{item.detail.color}};'>
+        <view class='title'>{{item.detail.title}}</view>
+        <view class='content'>{{item.detail.content}}</view>
+        <view class='time'>{{item.date}}</view>
+      </view>
+    </block>
 </view>
