@@ -11,10 +11,11 @@
   </view>
     <view class='name'>{{name}}</view>
     <view class='sign'>{{sign}}</view>
-    <block wx:for="{{dateList}}">
-      <view class="dateBox" style='background-color:{{item.detail.color}};'>
+    <block wx:for="{{dateList}}" wx:key="{{item.id}}">
+      <view class="dateBox" style='background-color:{{item.detail.color}};color:{{item.detail.fontColor}}'>
         <view class='title'>{{item.detail.title}}</view>
         <view class='content'>{{item.detail.content}}</view>
+        <view class='delect' data-delect-id="{{item._id}}" bindtap="delect" wx:if="{{showOne}}">删除</view>
         <view class='time'>{{item.date}}</view>
       </view>
     </block>

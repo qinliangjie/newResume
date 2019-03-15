@@ -5,11 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allColor:'defalut',
+    allColor:'rgb(219, 219, 219)',
     fontColor:'#333',
     title:'',
     content:''
   },
+  
   changeColor:function(e){
     var types = e.currentTarget.dataset.type;
     switch (types){
@@ -73,10 +74,12 @@ Page({
       })
       return
     }
+    
     wx.cloud.callFunction({
       name:'artcle',
       data:{
         database:{
+          date:that.data.date,
           title: that.data.title,
           content: that.data.content,
           color: that.data.allColor,
