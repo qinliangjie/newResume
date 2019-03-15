@@ -57,7 +57,7 @@
   position: absolute;
   top: 520rpx;
   font-size: 22px;
-  left: 30rpx
+  right: 30rpx
 }
 .edit_list{
   width: 90%;

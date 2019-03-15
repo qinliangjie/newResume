@@ -21,22 +21,22 @@
 }
 .head_{
   position: absolute;
-  width: 150rpx;
-  height: 150rpx;
-  border-radius: 150rpx;
+  width:200rpx;
+  height: 200rpx;
+  border-radius: 200rpx;
   left: 50%;
-  margin-left: -75rpx;
-  top: 425rpx;
+  margin-left: -100rpx;
+  top: 400rpx;
   background-color: white
 }
 .head_img{
-  width: 140rpx;
-  height:140rpx;
+  width: 190rpx;
+  height:190rpx;
   left: 5rpx;
   top: 5rpx;
   position: absolute;
   z-index: 1;
-  border-radius: 140rpx
+  border-radius: 190rpx
 }
 .head_i{
   position: absolute;
