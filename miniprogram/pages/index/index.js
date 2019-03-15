@@ -17,10 +17,13 @@ Page({
     wx.cloud.callFunction({
       name: 'login',
       complete: res => {
-        if (res.openid == that.openid)
-        that.setData({
-          showOne:true
-        })
+        if (res.result.openid == that.data.openid){
+          console.log(res.result.openid == that.data.openid)
+          that.setData({
+            showOne: true
+          })
+        }
+       
       }
     })
     const db = wx.cloud.database()
