@@ -26,7 +26,7 @@
   <view class='edit_list'>
     <view class='left_part'>隐私设置</view>
     <view class='right_part'>
-      <picker bindchange='change_p_index' value='{{privates[p_index].id}}' range-key='{{"detail"}}' range="{{privates}}">
+      <picker bindchange='change_p_index' range-key='{{"detail"}}' range="{{privates}}">
         <view class="picker">
           {{privates[p_index].detail}}
         </view>

@@ -11,35 +11,43 @@ Page({
     sign:"",//签名
     date: '2000-01-01',//出生日期
     privates:[{
-      id:1,
+      id:0,
       detail:'展示所有日志'
     },{
-      id:2,
-      detail:'仅展示半年内的日志'
-    },{
-      id:3,
+      id:1,
       detail:'仅展示三个月内的日志'
+    },{
+      id:2,
+      detail:'仅展示一个星期内的日志'
     },{ 
-      id:4,
+      id:3,
       detail:'仅展示三天内的日志'
     }],
-    p_index:0
+    p_index:1
   },
   gotoAdd: function () {
-    wx.navigateTo({
-      url: '../index/index'
+    setTimeout(function () {
+      wx.navigateTo({
+        url: '../index/index',
+      })
+    }, 1000)
+    wx.showToast({
+      icon: 'none',
+      title: '保存成功',
+      duration: 1000
     })
+   
   },
   change_p_index(e){
-    var value = e.detail.value
+    var i = e.detail.value
     wx.cloud.callFunction({
       name:'setting',
       data:{
-        p_index:value
+        p_index:i
       }
     })
     this.setData({
-      p_index:e.detail.value
+      p_index: i
     })
   },
   saveName(e){
@@ -109,10 +117,10 @@ Page({
                   })
                 },
                 fail: err => {
-                  wx.showToast({
-                    icon: 'none',
-                    title: '上传失败',
-                  })
+                    wx.showToast({
+                      icon: 'none',
+                      title: '上传失败',
+                    })
                   console.error('[云函数] [sum] 调用失败：', err)
                 }
               })

@@ -1,7 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <i wx:if="{{showOne}}" bindtap="gotoEdit" class='head_i iconfont icon-setting'></i>
-  <i wx:if="{{showOne}}" bindtap="gotoAdd" class='head_a iconfont icon-meh'></i>
+  
   <view class='edit_bg'>
     <image class='bg_img' mode='aspectFill' src='{{bgImg}}'>
     </image>
@@ -9,13 +8,15 @@
   <view class='head_'>
     <image class='head_img' src="{{proImg}}"></image>
   </view>
+  <i wx:if="{{showOne}}" bindtap="gotoEdit" class='head_i iconfont icon-setting'></i>
+  <i wx:if="{{showOne}}" bindtap="gotoAdd" class='head_a iconfont icon-meh'></i>
     <view class='name'>{{name}}</view>
     <view class='sign'>{{sign}}</view>
     <block wx:for="{{dateList}}" wx:key="{{item.id}}">
-      <view class="dateBox" style='background-color:{{item.detail.color}};color:{{item.detail.fontColor}}'>
+      <view class="dateBox" animation="{{animation[index]}}" bindtap='test' style='margin:{{margin[index]}};background-color:{{item.detail.color}};color:{{item.detail.fontColor}};'>
         <view class='title'>{{item.detail.title}}</view>
-        <view class='content'>{{item.detail.content}}</view>
-        <view class='delect' data-delect-id="{{item._id}}" bindtap="delect" wx:if="{{showOne}}">删除</view>
+        <view class='content ellipsis-two'>{{item.detail.content}}</view>
+        <view class='delect' data-delect-id="{{item._id}}" data-delect-index="{{index}}" catchtap="delect" wx:if="{{showOne}}">删除</view>
         <view class='time'>{{item.date}}</view>
       </view>
     </block>
