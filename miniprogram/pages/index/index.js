@@ -89,7 +89,11 @@ Page({
       db.collection('Arctic').orderBy('date', 'desc').limit(10).get().then(res => {
         if (that.data.p_index == 0) {
           for (var a of res.data) {
-            a.date = that.formatDate(a.date, "yyyy-MM-dd HH:mm:ss")
+            if (times - a.date.getTime() < 60 * 60 * 1000) {
+              a.date = parseInt((times - a.date.getTime()) / (60 * 1000)) + 1 + '分钟前';
+            } else {
+              a.date = that.formatDate(a.date, "yyyy-MM-dd HH:mm:ss")
+            }
             datas.push(a)
           }
         }
@@ -97,7 +101,11 @@ Page({
         if (that.data.p_index == 1) {
           for (var a of res.data) {
             if (times - a.date.getTime() < 90 * 24 * 60 * 60 * 1000) {
-              a.date = that.formatDate(a.date, "yyyy-MM-dd HH:mm:ss")
+              if (times - a.date.getTime() < 60 * 60 * 1000) {
+                a.date = parseInt((times - a.date.getTime()) / (60 * 1000)) + 1 + '分钟前';
+              } else {
+                a.date = that.formatDate(a.date, "yyyy-MM-dd HH:mm:ss")
+              }
             }
             datas.push(a)
           }
@@ -106,7 +114,11 @@ Page({
         if (that.data.p_index == 2) {
           for (var a of res.data) {
             if (times - a.date.getTime() < 7 * 24 * 60 * 60 * 1000) {
-              a.date = that.formatDate(a.date, "yyyy-MM-dd HH:mm:ss")
+              if (times - a.date.getTime() < 60 * 60 * 1000) {
+                a.date = parseInt((times - a.date.getTime()) / (60 * 1000)) + 1 + '分钟前';
+              } else {
+                a.date = that.formatDate(a.date, "yyyy-MM-dd HH:mm:ss")
+              }
             }
             datas.push(a)
           }
@@ -116,11 +128,10 @@ Page({
           for (var a of res.data) {
             if (times - a.date.getTime() < 3 * 24 * 60 * 60 * 1000) {
               if (times - a.date.getTime()<  60 * 60 * 1000){
-                a.date = parseInt((times -a.date.getTime()) / ( 60 * 1000))+'分钟前';
+                a.date = parseInt((times - a.date.getTime()) / (60 * 1000)) + 1+'分钟前';
               }else{
                 a.date = that.formatDate(a.date, "yyyy-MM-dd HH:mm:ss")
               }
-               
             }
             datas.push(a)
           }
